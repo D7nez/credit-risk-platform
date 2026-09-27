@@ -41,27 +41,7 @@
 
 **Python, pandas, NumPy, scikit-learn, joblib, HTML, CSS, JavaScript, SQLite, Docker Compose.**
 
-## التشغيل محليًا
-
-يتطلب التشغيل Docker Desktop مع Docker Compose:
-
-```bash
-cp .env.example .env
-# راجع قيم الإعدادات في .env قبل التشغيل
-docker compose up --build
-```
-
-افتح: **http://127.0.0.1:8000**
-
-إذا كان المنفذ `8000` مشغولًا، غيّر منفذ الجهاز في `compose.yaml` من `127.0.0.1:8000:8000` إلى `127.0.0.1:8001:8000`، ثم افتح `http://127.0.0.1:8001`.
-
-لإيقاف التطبيق:
-
-```bash
-docker compose down
-```
-
-## صيغة CSV لتحليل دفعة
+ة
 
 يجب أن يحتوي الملف على **الأعمدة الـ19 التالية** بالأسماء نفسها، دون أسماء أو معرّفات شخصية:
 
