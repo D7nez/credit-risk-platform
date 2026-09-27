@@ -1,0 +1,21 @@
+services:
+  riskscope:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      APP_HOST: 0.0.0.0
+      APP_PORT: 8000
+      DB_PATH: /app/state/predictions.sqlite3
+      MODEL_PATH: /app/models/credit_default_model.joblib
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - risk_state:/app/state
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+volumes:
+  risk_state:

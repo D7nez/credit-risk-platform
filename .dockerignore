@@ -1,0 +1,8 @@
+.env
+.venv
+state
+backups
+tests
+notebooks
+__pycache__
+*.pyc

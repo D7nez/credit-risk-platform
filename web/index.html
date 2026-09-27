@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102535">
+  <title>مرصد المخاطر | RiskScope</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="التنقل">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><div><strong>مرصد المخاطر</strong><small>RISK SCOPE</small></div></div>
+      <nav>
+        <button class="nav active" data-tab="single"><span>◈</span> تحليل سجل</button>
+        <button class="nav" data-tab="batch"><span>▦</span> تحليل دفعة</button>
+        <button class="nav" data-tab="monitor"><span>◉</span> المراقبة</button>
+        <button class="nav" data-tab="about"><span>◇</span> عن النموذج</button>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span id="serviceStatus">جارٍ فحص الخدمة</span><small>نموذج بحثي · لا ينفذ قرار تحصيل</small></div>
+    </aside>
+
+    <main>
+      <header class="topbar"><div class="breadcrumb">النماذج <span>/</span> احتمالية التعثر</div><button id="keyButton" class="key-button">إعداد مفاتيح الوصول <span>↗</span></button></header>
+      <div class="content">
+        <section id="single" class="tab-panel active">
+          <div class="hero"><div class="hero-copy"><span class="eyebrow">CREDIT DEFAULT · V1.0</span><h1>افهم المخاطر<br><em>قبل اتخاذ القرار.</em></h1><p>تقدير احتمالية تعثر سداد البطاقة في الشهر التالي من سجل المدفوعات السابق. أدخل القيم المالية وشاهد النتيجة فورًا.</p><div class="hero-chips"><span>19 مدخلًا ماليًا</span><span>احتمال معاير</span><span>تسجيل قابل للمراقبة</span></div></div><div class="hero-visual" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="center-icon">R<span>↗</span></div><div class="hero-tag">RISK MODEL<br><b>ACTIVE</b></div></div></div>
+          <div class="notice"><span class="notice-icon">!</span><p>النموذج مدرّب على بيانات تاريخية من تايوان. النتيجة للتجربة والتقييم، ولا تمثل قرارًا ائتمانيًا أو توصية بالتواصل مع العميل.</p></div>
+          <div class="section-heading"><div><span class="section-kicker">01 / SCORING</span><h2>تحليل سجل واحد</h2><p>قيم الأشهر السابقة والحد الائتماني فقط. لا تُدخل اسمًا أو معرّفًا شخصيًا.</p></div><button id="sampleButton" class="secondary-button">ملء مثال تجريبي ↙</button></div>
+          <form id="scoreForm" class="card form-card"><div id="inputGroups"></div><div class="form-footer"><span>تُستخدم القيم للتنبؤ ولا تُحفظ في قاعدة بيانات التطبيق.</span><button type="submit" class="primary-button">حساب احتمالية التعثر <span>←</span></button></div></form>
+          <div id="scoreResult" class="result-card" hidden></div>
+        </section>
+
+        <section id="batch" class="tab-panel">
+          <div class="page-heading"><span class="section-kicker">02 / BATCH SCORING</span><h1>تحليل دفعة سجلات</h1><p>ارفع CSV يحتوي أسماء الأعمدة المالية الـ19. الحد الأقصى 500 سجل في الطلب الواحد.</p></div>
+          <div class="card upload-card"><div class="upload-symbol">▦</div><h2>ارفع ملف CSV</h2><p>صف العناوين يجب أن يطابق أعمدة النموذج. لا تضع أسماء أو أرقام هوية في الملف.</p><input id="batchFile" type="file" accept=".csv,text/csv" aria-label="اختر ملف CSV"><div class="upload-actions"><button id="templateButton" class="secondary-button">تحميل قالب CSV</button><button id="batchButton" class="primary-button">تحليل الدفعة ←</button></div></div>
+          <div id="batchResult" class="card batch-result" hidden></div>
+        </section>
+
+        <section id="monitor" class="tab-panel">
+          <div class="page-heading heading-row"><div><span class="section-kicker">03 / MONITORING</span><h1>مراقبة النموذج</h1><p>تُحدّث المؤشرات من الطلبات المسجلة ونتائج التعثر التي تضيفها لاحقًا.</p></div><button id="refreshButton" class="secondary-button">تحديث البيانات ↻</button></div>
+          <div class="monitor-controls"><label>الفترة <select id="windowDays"><option value="7">آخر 7 أيام</option><option value="30" selected>آخر 30 يومًا</option><option value="90">آخر 90 يومًا</option></select></label><span id="modelVersion">نسخة النموذج: —</span></div>
+          <div class="stat-grid"><article class="stat-card"><small>التنبؤات</small><strong id="mPredictions">—</strong><span>ضمن الفترة</span></article><article class="stat-card"><small>نتائج فعلية</small><strong id="mLabeled">—</strong><span>مربوطة بتنبؤاتها</span></article><article class="stat-card"><small>متوسط الاحتمال</small><strong id="mMean">—</strong><span>من 0 إلى 100%</span></article><article class="stat-card"><small>تغيّر التوزيع · PSI</small><strong id="mPsi">—</strong><span id="psiHint">يلزم 100 تنبؤ</span></article></div>
+          <div class="chart-grid"><article class="card chart-card"><div class="card-title"><h2>حجم التنبؤات اليومي</h2><span>DAILY VOLUME</span></div><div id="dailyChart" class="bar-chart empty-chart">لا توجد بيانات بعد</div></article><article class="card chart-card"><div class="card-title"><h2>توزيع الاحتمالات</h2><span>SCORE DISTRIBUTION</span></div><div id="scoreChart" class="bar-chart empty-chart">لا توجد بيانات بعد</div></article></div>
+          <div class="monitor-bottom"><article class="card quality-card"><div class="card-title"><h2>الأداء بعد ظهور النتائج</h2><span>OBSERVED QUALITY</span></div><p id="qualityHint">يلزم 30 نتيجة فعلية على الأقل، مع وجود حالتي التعثر وعدم التعثر.</p><div class="quality-stats"><div><small>PR-AUC</small><strong id="qPr">—</strong></div><div><small>ROC-AUC</small><strong id="qRoc">—</strong></div><div><small>Brier</small><strong id="qBrier">—</strong></div><div><small>التقاط أعلى 20%</small><strong id="qCapture">—</strong></div></div></article><article class="card outcome-card"><div class="card-title"><h2>إضافة نتيجة فعلية</h2><span>OUTCOME FEEDBACK</span></div><p>بعد معرفة ما إذا حدث التعثر فعلًا، اربط النتيجة بمعرّف التنبؤ.</p><form id="outcomeForm"><label>معرّف التنبؤ<input id="outcomeId" type="text" placeholder="UUID من نتيجة التحليل" required></label><label>النتيجة الفعلية<select id="outcomeValue"><option value="1">حدث تعثر · 1</option><option value="0">لم يحدث تعثر · 0</option></select></label><button class="primary-button" type="submit">حفظ النتيجة ←</button></form><small>لا يمكن استبدال نتيجة مسجلة من الواجهة؛ التصحيح يتطلب مراجعة موثقة.</small></article></div>
+        </section>
+
+        <section id="about" class="tab-panel"><div class="page-heading"><span class="section-kicker">04 / MODEL CARD</span><h1>عن هذا النموذج</h1><p>ما يتنبأ به النموذج، كيف اختُبر، وما الذي لا يمكن استنتاجه منه.</p></div><div class="about-grid"><article class="card info-card"><span>01</span><h2>الهدف والبيانات</h2><p>احتمال تعثر سداد البطاقة الائتمانية في الشهر التالي. دُرّب على 30 ألف سجل تاريخي من تايوان عام 2005. لا يقدّر احتمالية السداد بعد بدء التحصيل.</p></article><article class="card info-card"><span>02</span><h2>التدريب والتقييم</h2><p>قُسمت البيانات 60% تدريب، 20% تحقق، و20% اختبار. اختير Gradient Boosting ثم عُيّرت احتمالاته. على الاختبار: PR-AUC ≈ 0.554، وROC-AUC ≈ 0.778.</p></article><article class="card info-card"><span>03</span><h2>المدخلات والإنصاف</h2><p>19 متغيرًا ماليًا تُشتق منها 3 ميزات. لا يستخدم الاسم أو المعرف أو الجنس أو العمر في التنبؤ. استبعاد السمات الحساسة وحده لا يثبت الإنصاف.</p></article><article class="card info-card"><span>04</span><h2>حدود النشر</h2><p>التطبيق صالح لتجربة تشغيلية مع بيانات اختبار مصرح بها. يلزم تحقق زمني، ومراجعة امتثال وأمن، وقياس أثر فعلي على محفظة مماثلة قبل استخدام درجاته في قرارات حقيقية.</p></article></div></section>
+      </div>
+      <footer>RiskScope · Credit default research platform <span>Python · scikit-learn · SQLite</span></footer>
+    </main>
+  </div>
+  <dialog id="keyDialog"><form method="dialog" id="keyForm"><div class="dialog-head"><h2>مفاتيح الوصول</h2><button value="cancel" class="close-button" aria-label="إغلاق">×</button></div><p>مفتاح التنبؤ لإجراء التحليل، ومفتاح الإدارة لمراجعة المراقبة وإضافة النتائج. يُحتفظ بهما في جلسة المتصفح فقط.</p><label>مفتاح التنبؤ<input id="apiKey" type="password" autocomplete="off" placeholder="APP_API_KEY"></label><label>مفتاح الإدارة<input id="adminKey" type="password" autocomplete="off" placeholder="APP_ADMIN_KEY"></label><button class="primary-button" id="saveKeys" value="save">حفظ لهذه الجلسة</button></form></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
